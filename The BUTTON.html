@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js">
+</script>
+<script>    
+//Useful funcitons For later ;)  
+function visible(id,conditionifon) {
+  if (conditionifon){
+    document.querySelector(id).removeAttribute("hidden",'');
+  }else{
+    document.querySelector(id).setAttribute('hidden','');
+  }
+}
+function collision(x,y,w,h){
+  for(var i = 0; i < (collisionboxes.length)/4; i+4){
+      if (x+w<collisionboxes[i] && collisionboxes[i+2]<x-w){
+        if (y+h<collisionboxes[i+1] && collisionboxes[i+3]<y-h){
+          return true
+        }
+      }
+  }
+  return false
+}
+function addimageat(xx,yy,srcc,id){
+      document.querySelector('#'+id).innerHTML="<img style='position:absolute;top:"+yy+"px;left:"+xx+"px' src=''>"
+    }
+function fullscreen(){
+  document.documentElement.requestFullscreen.call(document.documentElement);
+}
+//setup  --==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--
+playervar={
+  x:100,
+  y:100,
+  xv:8,
+  yv:-4,
+  CD:0,
+  color:0,
+  champ:0,
+  buildCD:0,
+  points:0,
+  stun:0,
+  hotdog:0,
+  applestacks:0,
+  prince:0,
+  size:0,
+  item:0,
+  crownfragments:0
+
+}
+collisionboxes=[100,400,300,500]
+//   Key Detection --==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--
+var keys = [];
+window.addEventListener("keydown",
+    function(e){
+        keys[e.keyCode] = e.keyCode;
+        var keysArray = getNumberArray(keys);
+      
+    },
+false);
+
+window.addEventListener('keyup',
+    function(e){
+        keys[e.keyCode] = false;
+    },
+false);
+
+function getNumberArray(arr){
+    var newArr = new Array();
+    for(var i = 0; i < arr.length; i++){
+        if(typeof arr[i] == "number"){
+            newArr[newArr.length] = arr[i];
+        }
+    }
+    return newArr;
+}
+function randint(min, max) {return Math.floor(Math.random() * (max - min) ) + min;}
+var intervalId = window.setInterval(function(){
+//Player stuff  --==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--
+    if(keys.includes(65)==true){
+          playervar.xv=playervar.xv-0.2}
+    if(keys.includes(68)==true){
+        playervar.xv=playervar.xv+0.2}
+    if(keys.includes(87)==true && playervar.y>499){
+        playervar.yv=-5}
+    if(keys.includes(32)==true && playervar.CD==0){
+      playervar.xv=playervar.xv*0.2
+      playervar.yv=playervar.yv*0.2
+      if(keys.includes(65)==true){
+          playervar.xv=playervar.xv+3
+          playervar.CD=165}
+      if(keys.includes(68)==true){
+        playervar.xv=playervar.xv-3
+        playervar.CD=165}
+      if(keys.includes(87)==true){
+        playervar.yv=playervar.yv-3
+        playervar.CD=165}
+      if(keys.includes(0)==true){
+          playervar.yv=playervar.yv+3
+          playervar.CD=165}}
+    
+      
+    playervar.yv=playervar.yv+0.1
+    playervar.x=playervar.x+playervar.xv
+    playervar.y=playervar.y+playervar.yv
+    playervar.xv=playervar.xv*0.96
+    if (!collision(playervar.x,playervar.y,40,50)){
+      playervar.y=500
+      playervar.yv=0}
+    if (playervar.x>1400){
+      playervar.x=-100}
+    if (playervar.x>1000){
+      playervar.x=1000
+      playervar.xv=0}
+    if (playervar.x<-100){
+      playervar.x=1400}
+    if (playervar.CD>0){
+      playervar.CD=playervar.CD-1}
+
+    //collision(playervar.x,playervar.y,40,50)
+    //Drawing Everything  --==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--
+    document.querySelector('#player1').innerHTML="<img style='height: 100px; width: 100px;position:absolute;top:"+playervar.y+"px;left:"+playervar.x+"px' src='Player.png'>"
+    document.querySelector('#data1').innerHTML='x: '+Math.round(playervar.x)
+    document.querySelector('#data2').innerHTML='y: '+Math.round(playervar.y)
+    document.querySelector('#data3').innerHTML='xv: '+Math.round(playervar.xv)
+    document.querySelector('#data4').innerHTML='yv: '+Math.round(playervar.yv)
+    document.querySelector('#data5').innerHTML='CD: '+playervar.CD
+    
+}, 0);
+</script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Platformer</title>
+</head>
+<body style="overflow-y: hidden;overflow-x: hidden;">
+  <p id="player1"></p>
+  <button onclick="fullscreen()">Fullscreen</button>
+  <p id="data1"></p>
+  <p id="data2"></p>
+  <p id="data3"></p>
+  <p id="data4"></p>
+  <p id="data5"></p>
+</body>
+</html>
