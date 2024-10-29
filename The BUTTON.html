@@ -11,19 +11,19 @@ function visible(id,conditionifon) {
     document.querySelector(id).setAttribute('hidden','');
   }
 }
-function collision(x,y,w,h){
-  for(var i = 0; i < (collisionboxes.length)/4; i+4){
-      if (x+w<collisionboxes[i] && collisionboxes[i+2]<x-w){
-        if (y+h<collisionboxes[i+1] && collisionboxes[i+3]<y-h){
-          return true
-        }
-      }
-  }
-  return false
-}
-function addimageat(xx,yy,srcc,id){
-      document.querySelector('#'+id).innerHTML="<img style='position:absolute;top:"+yy+"px;left:"+xx+"px' src=''>"
-    }
+// function collision(x,y,w,h){
+//   for(var i = 0; i < (collisionboxes.length)/4; i+4){
+//       if (x+w<collisionboxes[i] && collisionboxes[i+2]<x-w){
+//         if (y+h<collisionboxes[i+1] && collisionboxes[i+3]<y-h){
+//           return true
+//         }
+//       }
+//   }
+//   return false
+// }
+// function addimageat(xx,yy,srcc,id){
+//       document.querySelector('#'+id).innerHTML="<img style='position:absolute;top:"+yy+"px;left:"+xx+"px' src=''>"
+//     }
 function fullscreen(){
   document.documentElement.requestFullscreen.call(document.documentElement);
 }
