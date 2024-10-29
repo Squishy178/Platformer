@@ -11,16 +11,16 @@ function visible(id,conditionifon) {
     document.querySelector(id).setAttribute('hidden','');
   }
 }
-// function collision(x,y,w,h){
-//   for(var i = 0; i < (collisionboxes.length)/4; i+4){
-//       if (x+w<collisionboxes[i] && collisionboxes[i+2]<x-w){
-//         if (y+h<collisionboxes[i+1] && collisionboxes[i+3]<y-h){
-//           return true
-//         }
-//       }
-//   }
-//   return false
-// }
+function collision(x,y,w,h){
+  for(var i = 0; i < (collisionboxes.length)/4; i+4){
+      if (x+w<collisionboxes[i] && collisionboxes[i+2]<x-w){
+        if (y+h<collisionboxes[i+1] && collisionboxes[i+3]<y-h){
+          return true
+        }
+      }
+  }
+  return false
+}
 // function addimageat(xx,yy,srcc,id){
 //       document.querySelector('#'+id).innerHTML="<img style='position:absolute;top:"+yy+"px;left:"+xx+"px' src=''>"
 //     }
@@ -34,18 +34,7 @@ playervar={
   xv:8,
   yv:-4,
   CD:0,
-  color:0,
-  champ:0,
-  buildCD:0,
-  points:0,
-  stun:0,
-  hotdog:0,
-  applestacks:0,
-  prince:0,
-  size:0,
-  item:0,
-  crownfragments:0
-
+  
 }
 collisionboxes=[100,400,300,500]
 //   Key Detection --==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--
@@ -103,7 +92,7 @@ var intervalId = window.setInterval(function(){
     playervar.x=playervar.x+playervar.xv
     playervar.y=playervar.y+playervar.yv
     playervar.xv=playervar.xv*0.96
-    if (playervar.y>500){
+    if (collision(playervar.x,playervar.y,40,50){
       playervar.y=500
       playervar.yv=0}
     if (playervar.x>1400){
