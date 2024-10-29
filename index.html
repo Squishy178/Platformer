@@ -12,9 +12,9 @@ function visible(id,conditionifon) {
   }
 }
 function collision(x,y,w,h){
-  for(var i = 0; i < (collisionboxes.length)/4; i+4){
-      if (x+w<collisionboxes[i] && collisionboxes[i+2]<x-w){
-        if (y+h<collisionboxes[i+1] && collisionboxes[i+3]<y-h){
+  for(var i = 0; i < (collisionboxes_x.length); i++){
+      if (x+w<collisionboxes_x1[i] && collisionboxes_x2[i]<x-w){
+        if (y+h<collisionboxes_y1[i] && collisionboxes_y2[i]<y-h){
           return true
         }
       }
@@ -36,7 +36,10 @@ playervar={
   CD:0,
   
 }
-collisionboxes=[100,400,300,500]
+collisionboxes_x1=[100]
+collisionboxes_y1=[400]
+collisionboxes_x2=[300]
+collisionboxes_y2=[500]
 //   Key Detection --==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--
 var keys = [];
 window.addEventListener("keydown",
