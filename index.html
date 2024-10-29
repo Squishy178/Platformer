@@ -103,7 +103,7 @@ var intervalId = window.setInterval(function(){
     playervar.x=playervar.x+playervar.xv
     playervar.y=playervar.y+playervar.yv
     playervar.xv=playervar.xv*0.96
-    if (!collision(playervar.x,playervar.y,40,50)){
+    if (playervar.y>500){
       playervar.y=500
       playervar.yv=0}
     if (playervar.x>1400){
