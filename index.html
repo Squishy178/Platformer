@@ -12,9 +12,9 @@ function visible(id,conditionifon) {
   }
 }
 function collision(x,y,w,h){
-  for(var i = 0; i < (collisionboxes_x.length); i++){
-      if (x+w<collisionboxes_x1[i] && collisionboxes_x2[i]<x-w){
-        if (y+h<collisionboxes_y1[i] && collisionboxes_y2[i]<y-h){
+  for(var i = 0; i < (collisionboxes_x1.length); i++){
+      if ((x+40)<collisionboxes_x1[i] && collisionboxes_x2[i]<(x-40)){
+        if ((y+40)<collisionboxes_y1[i] && collisionboxes_y2[i]<(y-40)){
           return true
         }
       }
