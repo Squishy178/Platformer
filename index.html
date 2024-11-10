@@ -12,12 +12,14 @@ function visible(id,conditionifon) {
   }
 }
 function collision(x,y,w,h){
+  collision = ''
   for(var i = 0; i < (collisionboxes_x1.length); i++){
       if ((x+40)<collisionboxes_x1[i] && collisionboxes_x2[i]<(x-40)){
         if ((y+40)<collisionboxes_y1[i] && collisionboxes_y2[i]<(y-40)){
           return true
         }
       }
+      collision += '<div style="background-color:red;position:absolute;left:'+collisionboxes_x1+'px;top:'+collisionboxes_y1+'px;width:'+collisionboxes_x2+'px;height:'+collisionboxes_y2+'px;"></div>'
   }
   return false
 }
@@ -36,9 +38,9 @@ playervar={
   CD:0,
   
 }
-collisionboxes_x1=[100]
+collisionboxes_x1=[0]
 collisionboxes_y1=[400]
-collisionboxes_x2=[300]
+collisionboxes_x2=[1000]
 collisionboxes_y2=[500]
 //   Key Detection --==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--
 var keys = [];
@@ -98,13 +100,7 @@ var intervalId = window.setInterval(function(){
     if (collision(playervar.x,playervar.y,40,50)){
       playervar.y=500
       playervar.yv=0}
-    if (playervar.x>1400){
-      playervar.x=-100}
-    if (playervar.x>1000){
-      playervar.x=1000
-      playervar.xv=0}
-    if (playervar.x<-100){
-      playervar.x=1400}
+
     if (playervar.CD>0){
       playervar.CD=playervar.CD-1}
 
@@ -116,6 +112,7 @@ var intervalId = window.setInterval(function(){
     document.querySelector('#data3').innerHTML='xv: '+Math.round(playervar.xv)
     document.querySelector('#data4').innerHTML='yv: '+Math.round(playervar.yv)
     document.querySelector('#data5').innerHTML='CD: '+playervar.CD
+    document.querySelector('#collision').innerHTML=collision
     
 }, 0);
 </script>
@@ -132,5 +129,6 @@ var intervalId = window.setInterval(function(){
   <p id="data3"></p>
   <p id="data4"></p>
   <p id="data5"></p>
+  <div id="collision"></div>
 </body>
 </html>
